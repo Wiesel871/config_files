@@ -1,2 +1,1 @@
-require("xpavlov3")
-
+require("wiesel.init")

@@ -49,8 +49,8 @@ return require('packer').startup(function(use)
                 message = function()
                     return ("AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"))
                 end,
-                dim = 0.18, 
-                cleaning_interval = 10000, 
+                dim = 0.18,
+                cleaning_interval = 10000,
             },
         }
     end,
@@ -75,5 +75,3 @@ use {
 
 }
 end)
-
-
