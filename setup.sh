@@ -3,20 +3,11 @@
 sudo apt update
 sudo apt upgrade
 
-sudo apt install zsh
-sudo apt install i3
-sudo apt install gcc
-sudo apt install clang
-sudo apt install python3
-sudo apt install steam
-sudo apt install golang
-sudo apt install neovim
-sudo apt install npm
-sudo apt install default-jdk
+apt_installs=(zsh i3 gcc clang python steam golang neovim npm deafault-jdk)
 
-mkdir ~/.config
-mkdir ~/.config/nvim
-git clone git@github.com:Wiesel871/my_nvim_setup.git ~/.config/nvim/
+for inst in apt_installs; do
+    sudo apt install $inst
+done
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
@@ -26,6 +17,11 @@ mkdir -p "$HOME/src"
 cd "$HOME/src"
 git clone https://github.com/Gogh-Co/Gogh.git gogh
 cd gogh
+echo "choose some gnome terminal themes"
 
-zsh
-echo "export TERMINAL=gnome-terminal" >> ~/.zshrc
+ln -s nvim "$HOME/.config"
+ln -s i3 "$HOME/.config"
+ln -s tmux "$HOME/.config"
+
+ln -s zsh/.zshrc "$HOME/"
+ln -s zsh/.zsh_profile "$HOME/"
