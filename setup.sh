@@ -23,5 +23,5 @@ ln -s nvim "$HOME/.config"
 ln -s i3 "$HOME/.config"
 ln -s tmux "$HOME/.config"
 
-ln -s zsh/.zshrc "$HOME/"
-ln -s zsh/.zsh_profile "$HOME/"
+ln -s "zsh/.zshrc" "$HOME/"
+ln -s "zsh/.zsh_profile" "$HOME/"
