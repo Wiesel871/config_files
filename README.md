@@ -1,5 +1,8 @@
+# rundown
+bunch of config files that I use on my Linux machines
+
 # my_nvim_setup
-how to make work:
+    how to make work:
 1.  git clone --depth 1 https://github.com/wbthomason/packer.nvim\
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
