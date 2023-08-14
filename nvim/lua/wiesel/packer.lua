@@ -6,6 +6,8 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
         requires = { {'nvim-lua/plenary.nvim'} }
     }
+    use { "bluz71/vim-nightfly-colors", as = "nightfly" }
+    use { 'AlexvZyl/nordic.nvim' }
     use { "ellisonleao/gruvbox.nvim" }
     require("gruvbox").setup({
         undercurl = true,
