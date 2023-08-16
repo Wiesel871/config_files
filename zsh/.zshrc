@@ -101,4 +101,5 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-tmux
+
+[ -f "/home/wiesel/.ghcup/env" ] && source "/home/wiesel/.ghcup/env" # ghcup-env

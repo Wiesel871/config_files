@@ -47,3 +47,4 @@ ln -s tmux "$HOME/.config"
 
 ln -s "zsh/.zshrc" "$HOME/"
 ln -s "zsh/.zsh_profile" "$HOME/"
+ln -s "zsh/.oh-my-zsh" "$HOME/"
