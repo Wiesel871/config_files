@@ -5,6 +5,8 @@ sudo apt upgrade
 
 apt_installs=(zsh i3 gcc clang python steam golang neovim npm default-jdk)
 
+PTH=$(pwd)
+
 for inst in "${apt_installs[@]}"; do
     echo "install $inst? y/n"
     read answer
@@ -40,11 +42,12 @@ if [[ "$answer" =~ .*y.* ]]; then
     git clone https://github.com/Gogh-Co/Gogh.git gogh
 fi
 
-cd -
-ln -s nvim "$HOME/.config"
-ln -s i3 "$HOME/.config"
-ln -s tmux "$HOME/.config"
+cd "$HOME/.config"
+ln -s "$PTH/nvim" .
+ln -s "$PTH/i3" .
+ln -s "$PTH/tmux" .
 
-ln -s "zsh/.zshrc" "$HOME/"
-ln -s "zsh/.zsh_profile" "$HOME/"
-ln -s "zsh/.oh-my-zsh" "$HOME/"
+cd "$HOME"
+ln -s "$PTH/zsh/.zshrc" .
+ln -s "$PTH/zsh/.zsh_profile" .
+ln -s "$PTH/zsh/.oh-my-zsh" .
