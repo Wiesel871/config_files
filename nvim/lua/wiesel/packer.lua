@@ -30,14 +30,15 @@ return require('packer').startup(function(use)
         paletter_overrides = {},
         overrides = {},
         dim_inactive = false,
-        transparent_mode = false,
+        transparent_mode = true,
     })
-    use({
+    use ({
 	  'rose-pine/neovim',
 	  as = 'rose-pine',
 	  config = function()
 		  vim.cmd('colorscheme rose-pine')
 	end})
+    use{ 'jacoborus/tender.vim', as = 'tender' }
     use('nvim-treesitter/nvim-treesitter', {run = 'TSUpdate'})
     use('nvim-treesitter/playground')
     use('theprimeagen/harpoon')

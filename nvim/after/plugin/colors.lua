@@ -3,8 +3,9 @@ require('rose-pine').setup({
 })
 
 function ColorMyPencils(color)
-	color = color or "nordic"
+	color = color or "rose-pine"
 	vim.cmd.colorscheme(color)
+    TransBg()
 end
 
 function TransBg()
@@ -12,6 +13,4 @@ function TransBg()
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
-
 ColorMyPencils()
-
