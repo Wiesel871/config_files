@@ -193,5 +193,6 @@ bar {
         status_command i3status
 }
 
+exec --no-startup-id feh --bg-fill ./carina-nebula.jpg
 exec --no-startup-id i3-msg 'workspace 1:Web; exec /usr/bin/firefox'
 exec --no-startup-id i3-msg 'workspace 2:Terminal; exec i3-sensible-terminal'
