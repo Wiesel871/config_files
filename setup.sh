@@ -3,7 +3,7 @@
 sudo apt update
 sudo apt upgrade
 
-apt_installs=(zsh i3 gcc clang python steam golang neovim npm default-jdk)
+apt_installs=(zsh i3 gcc clang python steam golang neovim npm default-jdk "-y dotnet-sdk-7.0")
 
 PTH=$(pwd)
 
@@ -47,7 +47,7 @@ ln -s "$PTH/nvim" .
 ln -s "$PTH/i3" .
 ln -s "$PTH/tmux" .
 
-cd "$HOME"
+cd ""
 ln -s "$PTH/zsh/.zshrc" .
 ln -s "$PTH/zsh/.zsh_profile" .
 ln -s "$PTH/zsh/.oh-my-zsh" .
