@@ -38,7 +38,8 @@ return require('packer').startup(function(use)
 	  config = function()
 		  vim.cmd('colorscheme rose-pine')
 	end})
-    use{ 'jacoborus/tender.vim', as = 'tender' }
+    use{'jacoborus/tender.vim', as = 'tender' }
+    use('github/copilot.vim')
     use('nvim-treesitter/nvim-treesitter', {run = 'TSUpdate'})
     use('nvim-treesitter/playground')
     use('theprimeagen/harpoon')
