@@ -104,4 +104,16 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f "/home/wiesel/.ghcup/env" ] && source "/home/wiesel/.ghcup/env" # ghcup-env
 
+git_ucp() {
+    git add -u &&
+    git commit -m $1 &&
+    git push
+}
+
+git_acp() {
+    git add . &&
+    git commit -m $1 &&
+    git push
+}
+
 cd "$HOME"
