@@ -104,7 +104,8 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f "/home/wiesel/.ghcup/env" ] && source "/home/wiesel/.ghcup/env" # ghcup-env
 
-export GOPATH=$HOME/go
+export GOPATH=$HOME/gocode
+export GOROOT=$HOMR/go
 export PATH=$PATH:$GOPATH/bin
 
 
