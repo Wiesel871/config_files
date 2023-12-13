@@ -104,10 +104,8 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f "/home/wiesel/.ghcup/env" ] && source "/home/wiesel/.ghcup/env" # ghcup-env
 
-export GOPATH=$HOME/gocode
-export GOROOT=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
+export GOROOT=/usr/lib/go
+export GOPATH=$HOME/go
 
 alias git_rp="git reset --hard && git pull"
 
