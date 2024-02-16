@@ -4,7 +4,21 @@ sudo apt update
 sudo apt install git
 sudo apt upgrade
 
-apt_installs=(gcc clang python steam golang npm default-jdk "-y dotnet-sdk-7.0")
+echo "email for git: "
+read answer
+git config --global user.mail "$answer"
+echo "name for git:"
+read answer
+git config --global user.name "$answer"
+echo "email for ssh key for github: "
+read answer
+ssh-keygen -t ed25519 -C "$answer"
+cat ~/.ssh/id_ed25519.pub
+echo "copy this into the new ssh key on github, after you are done press <enter>"
+read answer
+
+
+apt_installs=(cargo gcc clang python3 steam golang npm default-jdk "-y dotnet-sdk-8.0")
 
 PTH=$(pwd)
 
@@ -17,7 +31,7 @@ for inst in "${apt_installs[@]}"; do
     sudo apt install $inst
 done
 
-echo "install neovim? z/n"
+echo "install neovim? y/n"
 read answer
 if [[ "$answer" =~ .*y.* ]]; then
     sudo snap install neovim
@@ -69,12 +83,6 @@ echo "install haskell? y/n"
 read answer
 if [[ "$answer" =~ .*y.* ]]; then
     curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-fi
-
-echo "install rust? y/n"
-read answer
-if [[ "$answer" =~ .*y.* ]]; then
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
 
 echo "install gogh terminal themes? y/n"
