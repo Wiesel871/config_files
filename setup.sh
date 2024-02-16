@@ -1,9 +1,10 @@
 #!/bin/bash
 
 sudo apt update
+sudo apt install git
 sudo apt upgrade
 
-apt_installs=(zsh i3 gcc clang python steam golang neovim npm default-jdk "-y dotnet-sdk-7.0")
+apt_installs=(gcc clang python steam golang npm default-jdk "-y dotnet-sdk-7.0")
 
 PTH=$(pwd)
 
@@ -16,11 +17,53 @@ for inst in "${apt_installs[@]}"; do
     sudo apt install $inst
 done
 
-echo "install ohmyzsh? y/n"
+echo "install neovim? z/n"
 read answer
 if [[ "$answer" =~ .*y.* ]]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sudo snap install neovim
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim\ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+    cd "$HOME/.config"
+    rm -rf nvim
+    ln -s "$PTH/nvim" .
 fi
+
+echo "install i3? y/n"
+read answer
+if [[ "$answer" =~ .*y.* ]]; then
+    sudo apt install i3
+    cd "$HOME/.config"
+    rm -rf i3
+    ln -s "$PTH/i3" .
+fi
+
+echo "install tmux? y/n"
+read answer
+if [[ "$answer" =~ .*y.* ]]; then
+    sudo apt install tmux
+    cd "$HOME/.config"
+    rm -rf tmux
+    ln -s "$PTH/tmux" .
+fi
+
+echo "install zsh? y/n"
+read answer
+if [[ "$answer" =~ .*y.* ]]; then
+    sudo apt install i3
+    cd "$HOME"
+    rm .zshrc
+    rm .zsh_profile
+    ln -s "$PTH/zsh/.zshrc" .
+    ln -s "$PTH/zsh/.zsh_profile" .
+
+    echo "install ohmyzsh? y/n"
+    read answer
+    if [[ "$answer" =~ .*y.* ]]; then
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+        rm -rf .oh-my-zsh
+        ln -s "$PTH/zsh/.oh-my-zsh" .
+    fi
+fi
+
 
 echo "install haskell? y/n"
 read answer
@@ -41,13 +84,3 @@ if [[ "$answer" =~ .*y.* ]]; then
     cd "$HOME/src"
     git clone https://github.com/Gogh-Co/Gogh.git gogh
 fi
-
-cd "$HOME/.config"
-ln -s "$PTH/nvim" .
-ln -s "$PTH/i3" .
-ln -s "$PTH/tmux" .
-
-cd ""
-ln -s "$PTH/zsh/.zshrc" .
-ln -s "$PTH/zsh/.zsh_profile" .
-ln -s "$PTH/zsh/.oh-my-zsh" .
