@@ -101,6 +101,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias clang-tidy.exe="/packages/run.64/llvm-15.0.7/bin/clang-tidy"
 
 [ -f "/home/wiesel/.ghcup/env" ] && source "/home/wiesel/.ghcup/env" # ghcup-env
 
@@ -115,3 +116,5 @@ git_acp() {
     git commit -m $1 &&
     git push
 }
+
+export ON_AISA=1
