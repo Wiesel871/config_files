@@ -109,11 +109,49 @@ alias git_rp="git reset --hard && git pull"
 git_ucp () {
     git add -u &&
     git commit -m "$1" &&
-    git push
+    git push && return 0
+    return 1
 }
 
 git_acp () {
     git add . &&
     git commit -m "$1" &&
-    git push
+    git push && return 0
+    return 1
+}
+
+export NIX_CONF_PATH="/home/wiesel/config_files/configuration.nix"
+
+nix_add() {
+    if [ -z "$1" ]; then
+        echo "Usage: nix_add <package1> [<package2> ...]"
+        return 1
+    fi
+    
+    for package in "$@"; do
+        sudo sed -i "/environment.systemPackages = with pkgs; \[/s/\$/ \n\t$package/" "$NIX_CONF_PATH"
+        echo "Added '$package' to systemPackages."
+    done
+    nixos-rebuild switch && 
+    git commit -m "succesfully added packages: $@ to nix config file" configuration.nix &&
+    return 1
+
+    return 0
+}
+
+nix_rm() {
+    if [ -z "$1" ]; then
+        echo "Usage: nix_rm <package1> [<package2> ...]"
+        return 1
+    fi
+    
+    for package in "$@"; do
+        sudo sed -i "/\t$package/d" "$NIX_CONF_PATH"
+        echo "Removed '$package' from systemPackages."
+    done
+    nixos-rebuild switch && 
+    git commit -m "succesfully removed packages: $@ from nix config file" configuration.nix &&
+    return 1
+
+    return 0
 }

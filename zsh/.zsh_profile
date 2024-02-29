@@ -13,3 +13,4 @@ export XDG_CONFIG_HOME=$HOME/.config
 export PATH=$PATH:/usr/local/go/bin
 
 VIM="nvim"
+
