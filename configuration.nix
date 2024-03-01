@@ -96,18 +96,31 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [          
+  environment.systemPackages = with pkgs; [                 
+	python3
+	zip
+	vscode
 	vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     	git
 	neovim  
 	clang
+	clang-tools
 	gcc
 	wget
 	zsh
 	cargo
-	go
 	deja-dup
+	spotify
+	cmake
+	gnumake
+	valgrind
+	unzip
   ];
+
+  programs.neovim = {
+  	enable = true;
+	defaultEditor = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
