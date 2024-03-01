@@ -124,12 +124,14 @@ git_acp () {
 export NIX_CONF_PATH_S="/etc/nixos/configuration.nix"
 export CONFIG_FILES="/home/wiesel/config_files/"
 
+alias nix_update="sudo cp "$NIX_CONF_PATH_S" "$CONFIG_FILES""
+
+
 nix_add() {
     for package in "$@"; do
         sudo sed -i "/environment.systemPackages = with pkgs; \[/s/\$/ \n\t$package/" "$NIX_CONF_PATH_S"
         echo "Added '$package' to systemPackages."
     done
-    sudo cp "$NIX_CONF_PATH_S" "$CONFIG_FILES"
 }
 
 nix_add_build() {
@@ -157,7 +159,6 @@ nix_rm() {
         sudo sed -i "/\t$package/d" "$NIX_CONF_PATH_S" &&
         echo "Removed '$package' from systemPackages."
     done
-    sudo cp "$NIX_CONF_PATH_S" "$CONFIG_FILES"
 }
 
 nix_rm_build() {
