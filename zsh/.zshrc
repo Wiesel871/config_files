@@ -3,6 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export PATH=$PATH:/usr/local/go/bin
 
 export XDG_CONFIG_HOME=$HOME/.config
 export TERMINAL=gnome-terminal
@@ -120,37 +121,60 @@ git_acp () {
     return 1
 }
 
-export NIX_CONF_PATH="/home/wiesel/config_files/configuration.nix"
+export NIX_CONF_PATH_S="/etc/nixos/configuration.nix"
+export CONFIG_FILES="/home/wiesel/config_files/"
 
 nix_add() {
+    for package in "$@"; do
+        sudo sed -i "/environment.systemPackages = with pkgs; \[/s/\$/ \n\t$package/" "$NIX_CONF_PATH_S"
+        echo "Added '$package' to systemPackages."
+    done
+    sudo cp "$NIX_CONF_PATH_S" "$CONFIG_FILES"
+}
+
+nix_add_build() {
     if [ -z "$1" ]; then
         echo "Usage: nix_add <package1> [<package2> ...]"
         return 1
     fi
     
     for package in "$@"; do
-        sudo sed -i "/environment.systemPackages = with pkgs; \[/s/\$/ \n\t$package/" "$NIX_CONF_PATH"
+        sudo sed -i "/environment.systemPackages = with pkgs; \[/s/\$/ \n\t$package/" "$NIX_CONF_PATH_S" &&
         echo "Added '$package' to systemPackages."
     done
-    nixos-rebuild switch && 
-    git commit -m "succesfully added packages: $@ to nix config file" configuration.nix &&
+    sudo nixos-rebuild switch && 
+    sudo rm -rf "$CONFIG_FILES/configuration.nix" &&
+    sudo cp "$NIX_CONF_PATH_S" "$CONFIG_FILES" &&
+    git add "$CONFIG_FILES/configuration.nix" &&
+    git commit -m "succesfully added packages: $@ to nix config file" &&
     return 1
 
     return 0
 }
 
 nix_rm() {
+    for package in "$@"; do
+        sudo sed -i "/\t$package/d" "$NIX_CONF_PATH_S" &&
+        echo "Removed '$package' from systemPackages."
+    done
+    sudo cp "$NIX_CONF_PATH_S" "$CONFIG_FILES"
+}
+
+nix_rm_build() {
     if [ -z "$1" ]; then
         echo "Usage: nix_rm <package1> [<package2> ...]"
         return 1
     fi
     
     for package in "$@"; do
-        sudo sed -i "/\t$package/d" "$NIX_CONF_PATH"
+        sudo sed -i "/\t$package/d" "$NIX_CONF_PATH_S"
         echo "Removed '$package' from systemPackages."
     done
-    nixos-rebuild switch && 
-    git commit -m "succesfully removed packages: $@ from nix config file" configuration.nix &&
+    sudo nixos-rebuild switch && 
+    sudo rm -rf "$CONFIG_FILES/configuration.nix" &&
+    sudo cp "$NIX_CONF_PATH_S" "$CONFIG_FILES" &&
+    git add "$CONFIG_FILES/configuration.nix" &&
+    git commit -m "succesfully removed packages: $@ from nix config file" &&
     return 1
 
     return 0
