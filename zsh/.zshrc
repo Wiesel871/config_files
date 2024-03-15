@@ -4,7 +4,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:/home/wiesel/go/bin
+export PATH=$PATH:$HOME/go/bin
 
 export XDG_CONFIG_HOME=$HOME/.config
 export TERMINAL=gnome-terminal
