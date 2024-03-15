@@ -53,35 +53,33 @@ return require('packer').startup(function(use)
         use('hrsh7th/vim-vsnip')
         use('tpope/vim-fugitive')
         use("arnamak/stay-centered.nvim")
-        use({ "Pocco81/auto-save.nvim",
-        config = function()
+        use({ "Pocco81/auto-save.nvim", config = function()
             require("auto-save").setup {
                 execution_message = {
                     message = function()
                         return ("AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"))
                     end,
                     dim = 0.18,
-                    cleaning_interval = 10000,
+                    cleaning_interval = 60 * 15 * 100,
                 },
             }
-        end,
-    })
-    use {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v2.x',
-        requires = {
-            {'neovim/nvim-lspconfig'},
-            {
-                'williamboman/mason.nvim',
-                run = function()
-                    pcall(vim.cmd, 'MasonUpdate')
-                end,
-            },
-            {'williamboman/mason-lspconfig.nvim'},
+        end})
+        use {
+            'VonHeikemen/lsp-zero.nvim',
+            branch = 'v2.x',
+            requires = {
+                {'neovim/nvim-lspconfig'},
+                {
+                    'williamboman/mason.nvim',
+                    run = function()
+                        pcall(vim.cmd, 'MasonUpdate')
+                    end,
+                },
+                {'williamboman/mason-lspconfig.nvim'},
 
-            {'hrsh7th/nvim-cmp'},
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'L3MON4D3/LuaSnip'},
+                {'hrsh7th/nvim-cmp'},
+                {'hrsh7th/cmp-nvim-lsp'},
+                {'L3MON4D3/LuaSnip'},
+            }
         }
-    }
-end)
+    end)
