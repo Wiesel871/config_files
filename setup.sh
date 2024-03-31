@@ -34,8 +34,8 @@ done
 echo "install neovim? y/n"
 read answer
 if [[ "$answer" =~ .*y.* ]]; then
-    sudo snap install neovim
-    git clone --depth 1 https://github.com/wbthomason/packer.nvim\ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+    sudo snap install nvim
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
     cd "$HOME/.config"
     rm -rf nvim
     ln -s "$PTH/nvim" .
@@ -62,7 +62,7 @@ fi
 echo "install zsh? y/n"
 read answer
 if [[ "$answer" =~ .*y.* ]]; then
-    sudo apt install i3
+    sudo apt install zsh
     cd "$HOME"
     rm .zshrc
     rm .zsh_profile
