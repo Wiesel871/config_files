@@ -123,7 +123,7 @@ git_acp () {
 }
 
 export NIX_CONF_PATH_S="/etc/nixos/configuration.nix"
-export CONFIG_FILES="/home/wiesel/config_files/"
+export MY_CONFIG_FILES="/home/wiesel/config_files/"
 
 alias nix_update="sudo cp "$NIX_CONF_PATH_S" "$CONFIG_FILES""
 

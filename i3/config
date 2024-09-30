@@ -52,8 +52,6 @@ floating_modifier $mod
 # or left-clicking anywhere into the window while holding the floating modifier.
 #tiling_drag modifier titlebar
 
-# start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -192,6 +190,8 @@ bindsym Print exec gnome-screenshot -i
 #crop-area screenshot by pressing Mod + printscreen
 bindsym $mod+Print exec gnome-screenshot -a
 
+bindsym $mod+Return exec i3-sensible-terminal gnome-console
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
@@ -200,4 +200,5 @@ bar {
 
 exec --no-startup-id feh --bg-fill ./carina-nebula.jpg
 exec --no-startup-id i3-msg 'workspace 1:Web; exec /usr/bin/firefox'
-exec --no-startup-id i3-msg 'workspace 2:Terminal; exec i3-sensible-terminal'
+exec --no-startup-id i3-msg 'workspace 2:Terminal; exec i3-sensible-terminal gnome-console'
+exec --no-startup-id xrdb -merge ~/.Xresources
