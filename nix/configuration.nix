@@ -10,8 +10,6 @@
     <nixos-wsl/modules>
   ];
 
-  programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
 
   wsl.enable = true;
   wsl.defaultUser = "nixos";
@@ -21,4 +19,22 @@
   environment.systemPackages = with pkgs; [
     inputs.self.packages.x86_64-linux.default
   ];
+
+  programs = {
+    home-manager.enable = true;
+    vim.enable = true;
+    git.enable = true;
+    zsh = {
+    enable = true;
+    #ohMyZsh = {
+    #    enable = true;
+    #    plugins = ["git"]
+    #};
+    };
+  };
+  users.defaultUserShell = pkgs.zsh;
+  nix = {
+    package = pkgs.nix;
+    settings.experimental-features = ["nix-command" "flakes"];
+  };
 }
