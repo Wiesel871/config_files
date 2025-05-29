@@ -9,6 +9,10 @@
 
   environment.systemPackages = with pkgs; [
     inputs.self.packages.x86_64-linux.default
+
+    gcc
+    cmake
+    gnumake
   ];
 
   programs = {
@@ -21,7 +25,11 @@
       #    plugins = ["git"]
       #};
     };
+    tmux = {
+      enable = true;
+    };
   };
+
   users.defaultUserShell = pkgs.zsh;
 
   nix = {
