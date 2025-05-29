@@ -31,7 +31,7 @@
       pkgs.vimPlugins.undotree
     ];
 
-    additionalRuntimePaths = ["$HOME/my_configs/nvim"];
+    additionalRuntimePaths = ["$HOME/config_files/nvim"];
     luaConfigRC = {
       myconfig =
         /*
