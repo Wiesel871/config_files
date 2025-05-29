@@ -43,6 +43,18 @@
         '';
     };
 
+    diagnostics = {
+      enable = true;
+      config = {
+        update_in_insert = true;
+        #virtual_lines = true;
+
+        nvim-lint = {
+          enable = true;
+        };
+      };
+    };
+
     #vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
     #vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
     #vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
@@ -63,6 +75,7 @@
         renameSymbol = "<leader>vrn";
         format = "<leader>ff";
         listReferences = "<leader>vrr";
+        openDiagnosticFloat = "<leader>vd";
       };
     };
     #['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),

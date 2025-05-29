@@ -7,6 +7,7 @@ inputs.nixpkgs.lib.nixosSystem {
   specialArgs = { inherit inputs; };
   modules = [
     configModule
+    ./configuration.shared.nix
     inputs.nvf.nixosModules.default
   ] ++ extraModules;
 }
