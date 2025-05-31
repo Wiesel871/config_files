@@ -1,3 +1,3 @@
 require("wiesel.remap")
 require("wiesel.set")
-require("stay-centered")
+--require("stay-centered")

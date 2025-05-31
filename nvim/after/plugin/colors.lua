@@ -8,7 +8,6 @@ function ColorMyPencils(color)
     require(color).setup({
         transparent_mode = true,
     })
-    TransBg()
 end
 
 function TransBg()
@@ -16,4 +15,5 @@ function TransBg()
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
-ColorMyPencils()
+--ColorMyPencils()
+TransBg()
