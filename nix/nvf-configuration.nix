@@ -13,7 +13,7 @@
 
     statusline.lualine.enable = true;
     telescope.enable = true;
-    autocomplete.nvim-cmp.enable = true;
+    #autocomplete.nvim-cmp.enable = true;
 
     languages = {
       enableFormat = true;
@@ -21,14 +21,12 @@
 
       nix.enable = true;
       rust.enable = true;
-      clang.enable = true;
-      ts.enable = true;
       lua.enable = true;
     };
 
-    startPlugins = [
-      pkgs.vimPlugins.harpoon
-      pkgs.vimPlugins.undotree
+    startPlugins = with pkgs; [
+      vimPlugins.harpoon
+      vimPlugins.undotree
     ];
 
     additionalRuntimePaths = ["$HOME/config_files/nvim"];

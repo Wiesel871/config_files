@@ -3,39 +3,26 @@
   pkgs,
   ...
 }: {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  programs = {
-    home-manager.enable = true;
-    vim.enable = true;
-    git.enable = true;
-    #zsh = {
-    #enable = true;
-    #ohMyZsh = {
-    #    enable = true;
-    #    plugins = ["git"]
-    #};
-    #};
-  };
   home = {
-    username = "nixos";
-    homeDirectory = "/home/nixos";
-    stateVersion = "25.05";
+    #username = "nixos";
+    #homeDirectory = "/home/nixos";
+    stateVersion = "unstable";
     packages = [
-      pkgs.gcc
 
-      pkgs.nodejs_20
-      pkgs.docker
-      pkgs.docker-compose
-      pkgs.turbo
-
-      pkgs.cargo
     ];
   };
 
-  nix = {
-    package = pkgs.nix;
-    settings.experimental-features = ["nix-command" "flakes"];
+  dconf.settings = {
+      "org/gnome/shell" = {
+          enabled-extensions = [
+              "extension-list@tu.berry"
+          ];
+      };
+
+      "org/gnome/shell/extensions/extension-list" = {
+          show-extension-version = true;
+          show-extension-description = true;
+      };
   };
 }
 # This value determines the Home Manager release that your configuration is
