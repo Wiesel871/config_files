@@ -6,7 +6,7 @@
   home = {
     #username = "nixos";
     #homeDirectory = "/home/nixos";
-    stateVersion = "unstable";
+    stateVersion = "24.05";
     packages = [
 
     ];

@@ -3,9 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let
-    unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -83,20 +80,20 @@ in
           videoDrivers = ["nvidia"];
           displayManager.gdm.enable = true;
           desktopManager.gnome.enable = true;
-          /*
-          desktopManager.xterm.enable = false;
-          displayManager.defaultSession = "none+i3";
-
-          windowManager.i3 = {
-            enable = true;
-            extraPackages = with pkgs; [
-                dmenu #application launcher most people use
-                i3status # gives you the default i3 status bar
-                i3lock #default i3 screen locker
-            ];
-          };
-        */
       };
+      /*
+         desktopManager.xterm.enable = false;
+         displayManager.defaultSession = "none+i3";
+
+         windowManager.i3 = {
+         enable = true;
+         extraPackages = with pkgs; [
+         dmenu #application launcher most people use
+         i3status # gives you the default i3 status bar
+         i3lock #default i3 screen locker
+         ];
+         };
+       */
       # Enable CUPS to print documents.
       printing.enable = true;
 
@@ -131,9 +128,9 @@ in
       pathsToLink = [ "/libexec" ];
       systemPackages = with pkgs; [     
           gnome-tweaks
-          gnomeExtensions.zen
-          unstable.gnomeExtensions.binu
-          unstable.gnomeExtensions.extension-list
+          #gnomeExtensions.zen
+          gnomeExtensions.binu
+          #gnomeExtensions.extension-list
 
           gnome-themes-extra
 

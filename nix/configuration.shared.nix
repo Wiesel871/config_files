@@ -5,7 +5,7 @@
   inputs,
   ...
 }: {
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   environment.systemPackages = with pkgs; [
     inputs.self.packages.x86_64-linux.default
@@ -35,7 +35,7 @@
   users.defaultUserShell = pkgs.zsh;
 
   nix = {
-    package = pkgs.nix;
+    package = pkgs.nixVersions.latest;
     settings.experimental-features = ["nix-command" "flakes"];
   };
 }
