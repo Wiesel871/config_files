@@ -2,12 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, user, ... }:
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
     ];
 
   # Bootloader.
@@ -116,7 +115,7 @@
   security.rtkit.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.wiesel = {
+  users.users.${user} = {
     isNormalUser = true;
     description = "Filip Pavlovic";
     extraGroups = [ "networkmanager" "wheel" ];
@@ -179,5 +178,4 @@
           enable = true;
       };
   };
-  home-manager.users."wiesel" = import ./home.nix;
 }
