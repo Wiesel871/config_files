@@ -14,10 +14,11 @@
     self,
     nixpkgs,
     nvf,
+    home-manager,
     ...
   } @ inputs: let
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    mkSystem = import ./module-template.nix {inherit inputs;};
+    mkSystem = import ./module-template.nix {inherit inputs; };
   in {
     packages."x86_64-linux".default =
       (nvf.lib.neovimConfiguration {
