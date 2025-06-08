@@ -1,15 +1,15 @@
-{ inputs, system ? "x86_64-linux", extraModules ? [], user ? "", home-manager }:
+{ inputs, system ? "x86_64-linux", extraModules ? [], ... }:
 
-{ configModule }:
+{ configModule, user ? "", inExtraModules ? [] }:
 
 inputs.nixpkgs.lib.nixosSystem {
   inherit system;
   specialArgs = { inherit inputs; };
   modules = [
     configModule
-    ./configuration.shared.nix
+    ./shared.nix
     inputs.nvf.nixosModules.default
-    home-manager.nixosModules.home-manager
+    inputs.home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
@@ -18,5 +18,5 @@ inputs.nixpkgs.lib.nixosSystem {
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
           }
-  ] ++ extraModules;
+  ] ++ extraModules ++ inExtraModules;
 }

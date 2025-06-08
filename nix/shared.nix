@@ -18,7 +18,7 @@
   programs = {
     vim.enable = true;
     git = {
-        enable = true;
+      enable = true;
     };
     zsh = {
       enable = true;

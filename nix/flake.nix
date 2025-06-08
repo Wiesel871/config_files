@@ -26,12 +26,12 @@
       }).neovim;
 
     nixosConfigurations = {
-      desktop = mkSystem {
-        configModule = ./configuration.desktop.nix;
+      laptop = mkSystem {
+        configModule = ./laptop.nix;
         user = "wiesel";
       };
       wsl = mkSystem {
-        configModule = ./configuration.wsl.nix;
+        configModule = ./wsl.nix;
         user = "nixos";
       };
     };

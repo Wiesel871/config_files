@@ -8,12 +8,10 @@
       enable = true;
       name = "rose-pine";
       style = "main";
-      #disableBackground = true;
     };
 
     statusline.lualine.enable = true;
     telescope.enable = true;
-    #autocomplete.nvim-cmp.enable = true;
 
     languages = {
       enableFormat = true;
