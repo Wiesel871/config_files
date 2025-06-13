@@ -70,18 +70,18 @@
         variant = "";
       };
       videoDrivers = ["nvidia"];
+
+      windowManager.xmonad = {
+        enable = true;
+        enableContribAndExtras = true;
+        config = builtins.readFile ./xmonad.hs;
+      };
     };
     /*
         displayManager.gdm.enable = true;
         desktopManager.gnome.enable = true;
     #
     */
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-      config = builtins.readFile ./xmonad.hs;
-    };
-
     /*
         desktopManager.xterm.enable = false;
         displayManager.defaultSession = "none+i3";
