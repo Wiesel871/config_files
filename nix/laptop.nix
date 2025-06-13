@@ -71,34 +71,53 @@
       };
       videoDrivers = ["nvidia"];
     };
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
     /*
-    desktopManager.xterm.enable = false;
-    displayManager.defaultSession = "none+i3";
-
-    windowManager.i3 = {
-    enable = true;
-    extraPackages = with pkgs; [
-    dmenu
-    i3status
-    i3lock
-    ];
+        displayManager.gdm.enable = true;
+        desktopManager.gnome.enable = true;
+    #
+    */
+    windowManager.xmonad = {
+      enable = true;
+      enableContribAndExtras = true;
+      config = builtins.readFile ./xmonad.hs;
     };
+
+    /*
+        desktopManager.xterm.enable = false;
+        displayManager.defaultSession = "none+i3";
+
+        windowManager.i3 = {
+        enable = true;
+        extraPackages = with pkgs; [
+        dmenu
+        i3status
+        i3lock
+        ];
+        };
+    #
     */
   };
-  systemPackages = with pkgs; [
-    rose-pine-gtk-theme
-    sassc
-    gtk-engine-murrine
-    gnome-tweaks
-    gnomeExtensions.zen
-    gnomeExtensions.binu
-    gnomeExtensions.extension-list
-    gnomeExtensions.user-themes
+  environment = {
+    systemPackages = with pkgs; [
+      rose-pine-gtk-theme
+      sassc
+      gtk-engine-murrine
+      gnome-tweaks
+      gnomeExtensions.zen
+      gnomeExtensions.binu
+      gnomeExtensions.extension-list
+      gnomeExtensions.user-themes
 
-    gnome-themes-extra
-  ];
+      gnome-themes-extra
+
+      ghc
+      cabal-install
+      haskellPackages.stack
+      haskellPackages.haskell-language-server
+      haskellPackages.hoogle
+      haskellPackages.ghcide
+    ];
+  };
   programs = {
     dconf = {
       enable = true;
