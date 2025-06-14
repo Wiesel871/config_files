@@ -57,9 +57,9 @@ myKeys conf@(XConfig{XMonad.modMask = modm}) =
         -- launch a terminal
         [ ((modm, xK_Return), spawn $ XMonad.terminal conf)
         , -- launch dmenu
-          ((modm, xK_p), spawn "dmenu_run")
+          ((modm, xK_d), spawn "dmenu_run")
         , -- launch gmrun
-          ((modm, xK_d), spawn "gmrun")
+          ((modm .|. shiftMask, xK_d), spawn "gmrun")
         , -- close focused window
           ((modm .|. shiftMask, xK_c), kill)
         , -- Rotate through the available layout algorithms
@@ -77,7 +77,7 @@ myKeys conf@(XConfig{XMonad.modMask = modm}) =
         , -- Move focus to the master window
           ((modm, xK_m), windows W.focusMaster)
         , -- Swap the focused window and the master window
-          ((modm, xK_Return), windows W.swapMaster)
+          ((modm .|. shiftMask, xK_Return), windows W.swapMaster)
         , -- Swap the focused window with the next window
           ((modm .|. shiftMask, xK_j), windows W.swapDown)
         , -- Swap the focused window with the previous window
@@ -228,7 +228,8 @@ myLogHook = return ()
 -- per-workspace layout choices.
 --
 -- By default, do nothing.
-myStartupHook = return ()
+myStartupHook = do
+    return ()
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

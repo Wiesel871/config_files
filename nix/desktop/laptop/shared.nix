@@ -5,8 +5,8 @@
   ...
 }: {
   imports = [
-    ./laptop.hardware.nix
-    ./desktop.nix
+    ./hardware.nix
+    ../desktop.nix
   ];
 
   boot = {
@@ -70,46 +70,11 @@
         variant = "";
       };
       videoDrivers = ["nvidia"];
-
-      windowManager.xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-        config = builtins.readFile ./xmonad.hs;
-      };
     };
-    /*
-        displayManager.gdm.enable = true;
-        desktopManager.gnome.enable = true;
-    #
-    */
-    /*
-        desktopManager.xterm.enable = false;
-        displayManager.defaultSession = "none+i3";
-
-        windowManager.i3 = {
-        enable = true;
-        extraPackages = with pkgs; [
-        dmenu
-        i3status
-        i3lock
-        ];
-        };
-    #
-    */
   };
+
   environment = {
     systemPackages = with pkgs; [
-      rose-pine-gtk-theme
-      sassc
-      gtk-engine-murrine
-      gnome-tweaks
-      gnomeExtensions.zen
-      gnomeExtensions.binu
-      gnomeExtensions.extension-list
-      gnomeExtensions.user-themes
-
-      gnome-themes-extra
-
       ghc
       cabal-install
       haskellPackages.stack
@@ -117,10 +82,5 @@
       haskellPackages.hoogle
       haskellPackages.ghcide
     ];
-  };
-  programs = {
-    dconf = {
-      enable = true;
-    };
   };
 }
