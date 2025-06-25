@@ -4,7 +4,7 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use {
         'nvim-telescope/telescope.nvim', branch = '0.1.x',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end }
     use { "bluz71/vim-nightfly-colors", as = "nightfly" }
@@ -33,27 +33,29 @@ return require('packer').startup(function(use)
         dim_inactive = false,
         transparent_mode = true,
     })
-    use ({
+    use({
         'rose-pine/neovim',
         as = 'rose-pine',
         config = function()
             vim.cmd('colorscheme rose-pine')
-        end})
-        use{'jacoborus/tender.vim', as = 'tender' }
-        use('github/copilot.vim')
-        use('nvim-treesitter/nvim-treesitter', {run = 'TSUpdate'})
-        use('nvim-treesitter/playground')
-        use('theprimeagen/harpoon')
-        use('mbbill/undotree')
-        use('simrat39/rust-tools.nvim')
-        use('hrsh7th/cmp-nvim-lsp-signature-help')
-        use('hrsh7th/cmp-vsnip')
-        use('hrsh7th/cmp-path')
-        use('hrsh7th/cmp-buffer')
-        use('hrsh7th/vim-vsnip')
-        use('tpope/vim-fugitive')
-        use("arnamak/stay-centered.nvim")
-        use({ "Pocco81/auto-save.nvim", config = function()
+        end
+    })
+    use { 'jacoborus/tender.vim', as = 'tender' }
+    use('nvim-treesitter/nvim-treesitter', { run = 'TSUpdate' })
+    use('nvim-treesitter/playground')
+    use('theprimeagen/harpoon')
+    use('mbbill/undotree')
+    use('simrat39/rust-tools.nvim')
+    use('hrsh7th/cmp-nvim-lsp-signature-help')
+    use('hrsh7th/cmp-vsnip')
+    use('hrsh7th/cmp-path')
+    use('hrsh7th/cmp-buffer')
+    use('hrsh7th/vim-vsnip')
+    use('tpope/vim-fugitive')
+    use("arnamak/stay-centered.nvim")
+    use({
+        "Pocco81/auto-save.nvim",
+        config = function()
             require("auto-save").setup {
                 execution_message = {
                     message = function()
@@ -63,23 +65,24 @@ return require('packer').startup(function(use)
                     cleaning_interval = 60 * 15 * 100,
                 },
             }
-        end})
-        use {
-            'VonHeikemen/lsp-zero.nvim',
-            branch = 'v2.x',
-            requires = {
-                {'neovim/nvim-lspconfig'},
-                {
-                    'williamboman/mason.nvim',
-                    run = function()
-                        pcall(vim.cmd, 'MasonUpdate')
-                    end,
-                },
-                {'williamboman/mason-lspconfig.nvim'},
+        end
+    })
+    use {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v2.x',
+        requires = {
+            { 'neovim/nvim-lspconfig' },
+            {
+                'williamboman/mason.nvim',
+                run = function()
+                    pcall(vim.cmd, 'MasonUpdate')
+                end,
+            },
+            { 'williamboman/mason-lspconfig.nvim' },
 
-                {'hrsh7th/nvim-cmp'},
-                {'hrsh7th/cmp-nvim-lsp'},
-                {'L3MON4D3/LuaSnip'},
-            }
+            { 'hrsh7th/nvim-cmp' },
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'L3MON4D3/LuaSnip' },
         }
-    end)
+    }
+end)

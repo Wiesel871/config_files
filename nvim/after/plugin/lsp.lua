@@ -9,7 +9,7 @@ lsp.ensure_installed({
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
 
-
+--[[
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -59,3 +59,4 @@ lsp.setup()
 vim.diagnostic.config({
     virtual_text = true
 })
+--]]

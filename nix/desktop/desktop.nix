@@ -57,7 +57,6 @@
     systemPackages = with pkgs; [
       alacritty
       arandr
-      brave
       cmake
       deja-dup
       discord
@@ -69,7 +68,6 @@
       parsec-bin
       spotify
       unzip
-      valgrind
       wget
       xclip
       zip

@@ -51,7 +51,7 @@
 
       nvidiaSettings = true;
 
-      package = pkgs.linuxPackages.nvidiaPackages.latest;
+      package = pkgs.linuxPackages.nvidiaPackages.beta;
 
       prime = {
         sync.enable = true;

@@ -18,11 +18,9 @@
   } @ inputs: let
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
     mkSystem = import ./module-template.nix {inherit inputs;};
-    mkLaptop = configModule:
-      mkSystem {
-        user = "wiesel";
-        configModule = configModule;
-      };
+    mkSystemUser = user:  configModule: mkSystem { user = user; configModule = configModule; };
+    mkLaptop = mkSystemUser "wiesel";
+    mkWsl = mkSystemUser "nixos";
   in {
     packages."x86_64-linux".default =
       (nvf.lib.neovimConfiguration {
@@ -35,10 +33,7 @@
       laptop-i3 = mkLaptop ./desktop/laptop/i3.nix;
       laptop-xmonad = mkLaptop ./desktop/laptop/xmonad.nix;
 
-      wsl = mkSystem {
-        configModule = ./wsl.nix;
-        user = "nixos";
-      };
+      wsl = mkWsl ./wsl.nix;
     };
   };
 }

@@ -13,6 +13,8 @@ import XMonad
 
 import Data.Map qualified as M
 import XMonad.StackSet qualified as W
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Util.SpawnOnce
 
 myTerminal = "alacritty"
 
@@ -123,6 +125,13 @@ myKeys conf@(XConfig{XMonad.modMask = modm}) =
             | (key, sc) <- zip [xK_w, xK_e, xK_r] [0 ..]
             , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
             ]
+            ++
+            -- custom
+            [
+                ((0, xK_Print), spawn "flameshot gui --clipboard -p ~/KINGSTON/Pictures/Screenshots"),
+                ((shiftMask, xK_Print), spawn "flameshot screen --clipboard")
+            ]
+
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
@@ -229,6 +238,12 @@ myLogHook = return ()
 --
 -- By default, do nothing.
 myStartupHook = do
+    spawnOnce "xrandr --auto"
+    spawnOnce "xrandr --output DP-4 --mode 2560x1440 --rate 165"
+    spawnOnce "xrandr --output DP-0 --mode 2560x1440 --rate 180"
+    spawnOnce "udiskie &"
+    spawnOnce "flameshot &"
+    spawnOnce "picom --backend glx &"
     return ()
 
 ------------------------------------------------------------------------
@@ -236,7 +251,7 @@ myStartupHook = do
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad defaults
+main = xmonad . ewmh $ defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
