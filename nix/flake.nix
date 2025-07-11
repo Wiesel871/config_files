@@ -18,7 +18,11 @@
   } @ inputs: let
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
     mkSystem = import ./module-template.nix {inherit inputs;};
-    mkSystemUser = user:  configModule: mkSystem { user = user; configModule = configModule; };
+    mkSystemUser = user: configModule:
+      mkSystem {
+        user = user;
+        configModule = configModule;
+      };
     mkLaptop = mkSystemUser "wiesel";
     mkWsl = mkSystemUser "nixos";
   in {
@@ -32,7 +36,7 @@
       laptop-gnome = mkLaptop ./desktop/laptop/gnome.nix;
       laptop-i3 = mkLaptop ./desktop/laptop/i3.nix;
       laptop-xmonad = mkLaptop ./desktop/laptop/xmonad.nix;
-	vm-kde = mkLaptop ./desktop/vm/kde.nix;
+      vm-kde = mkLaptop ./desktop/vm/kde.nix;
 
       wsl = mkWsl ./wsl.nix;
     };

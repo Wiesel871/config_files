@@ -23,6 +23,13 @@
     };
     zsh = {
       enable = true;
+      enableCompletion = true;
+      syntaxHighlighting.enable = true;
+      enableLsColors = true;
+      autosuggestions = {
+        enable = true;
+        strategy = ["completion"];
+      };
       #ohMyZsh = {
       #    enable = true;
       #    plugins = ["git"]

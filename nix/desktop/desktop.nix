@@ -13,6 +13,15 @@
     #   default = "http://user:password@proxy:port/";
     #   noProxy = "127.0.0.1,localhost,internal.domain";
     # };
+    interfaces.enp49s0 = {
+      useDHCP = false;
+      ipv4.addresses = [
+        {
+          address = "192.168.1.100";
+          prefixLength = 24;
+        }
+      ];
+    };
   };
 
   time.timeZone = "Europe/Bratislava";
@@ -61,6 +70,8 @@
       cmake
       deja-dup
       discord
+      dsda-doom
+      dsda-launcher
       feh
       firefox
       gimp
@@ -78,6 +89,19 @@
   nixpkgs.config.allowUnfree = true;
 
   programs = {
+    #pay-respects.enable = true;
+    #ccache.enable = true;
+    traceroute.enable = true;
+    wireshark = {
+      enable = true;
+      dumpcap.enable = true;
+      usbmon.enable = true;
+    };
+    thunar.enable = true;
+    gamemode = {
+      enable = true;
+      enableRenice = true;
+    };
     neovim = {
       enable = true;
       defaultEditor = true;

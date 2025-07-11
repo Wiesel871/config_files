@@ -12,8 +12,8 @@ import System.Exit
 import XMonad
 
 import Data.Map qualified as M
-import XMonad.StackSet qualified as W
 import XMonad.Hooks.EwmhDesktops
+import XMonad.StackSet qualified as W
 import XMonad.Util.SpawnOnce
 
 myTerminal = "alacritty"
@@ -54,12 +54,25 @@ myFocusedBorderColor = "#ff0000"
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
+doomPath = " 'KINGSTON/SteamLibrary/steamapps/common/Ultimate Doom/base/doom2/DOOM2.WAD' "
+
+doomIWAD = " -iwad " ++ doomPath
+
+doomSkill = " -uv "
+
+doomLvl = " -warp 1 "
+
+doomCmd = "dsda-doom " ++ doomIWAD ++ doomSkill ++ doomLvl
+
+spawnLog cmd = spawn ("echo \"" ++ cmd ++ "\" > ~/xmonad.log;" ++ cmd)
+
 myKeys conf@(XConfig{XMonad.modMask = modm}) =
     M.fromList $
         -- launch a terminal
         [ ((modm, xK_Return), spawn $ XMonad.terminal conf)
         , -- launch dmenu
-          ((modm, xK_d), spawn "dmenu_run")
+          ((modm, xK_d), spawnLog "dmenu_run")
+        , ((modm, xK_p), spawnLog doomCmd)
         , -- launch gmrun
           ((modm .|. shiftMask, xK_d), spawn "gmrun")
         , -- close focused window
@@ -103,9 +116,9 @@ myKeys conf@(XConfig{XMonad.modMask = modm}) =
           -- Quit xmonad
           ((modm .|. shiftMask, xK_q), io (exitWith ExitSuccess))
         , -- Restart xmonad
-          ((modm, xK_q), spawn "xmonad --recompile; xmonad --restart")
+          ((modm, xK_q), spawnLog "xmonad --recompile; xmonad --restart;")
         , -- Run xmessage with a summary of the default keybindings (useful for beginners)
-          ((modm .|. shiftMask, xK_slash), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+          ((modm .|. shiftMask, xK_slash), spawnLog ("echo \"" ++ help ++ "\" | xmessage -file -"))
         ]
             ++
             --
@@ -127,11 +140,9 @@ myKeys conf@(XConfig{XMonad.modMask = modm}) =
             ]
             ++
             -- custom
-            [
-                ((0, xK_Print), spawn "flameshot gui --clipboard -p ~/KINGSTON/Pictures/Screenshots"),
-                ((shiftMask, xK_Print), spawn "flameshot screen --clipboard")
+            [ ((0, xK_Print), spawnLog "flameshot gui --clipboard -p ~/KINGSTON/Pictures/Screenshots")
+            , ((shiftMask, xK_Print), spawnLog "flameshot screen --clipboard")
             ]
-
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events

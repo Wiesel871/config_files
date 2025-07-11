@@ -38,6 +38,23 @@
     };
     supportedFilesystems = ["ntfs"];
   };
+  networking = {
+    firewall = {
+      allowPing = true;
+      allowedTCPPortRanges = [
+        {
+          from = 8000;
+          to = 9000;
+        }
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 8000;
+          to = 9000;
+        }
+      ];
+    };
+  };
   hardware = {
     graphics.enable = true;
     nvidia = {
@@ -84,5 +101,13 @@
       haskellPackages.hoogle
       haskellPackages.ghcide
     ];
+  };
+
+  programs = {
+    tuxclocker = {
+      enable = true;
+      useUnfree = true;
+      enabledNVIDIADevices = [0];
+    };
   };
 }
