@@ -32,6 +32,7 @@
       laptop-gnome = mkLaptop ./desktop/laptop/gnome.nix;
       laptop-i3 = mkLaptop ./desktop/laptop/i3.nix;
       laptop-xmonad = mkLaptop ./desktop/laptop/xmonad.nix;
+	vm-kde = mkLaptop ./desktop/vm/kde.nix;
 
       wsl = mkWsl ./wsl.nix;
     };
