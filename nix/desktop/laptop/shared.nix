@@ -11,7 +11,7 @@
 
   boot = {
     loader = {
-      #systemd-boot.enable = true;
+      systemd-boot.enable = false;
       efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
@@ -53,12 +53,14 @@
 
       package = pkgs.linuxPackages.nvidiaPackages.beta;
 
+      /*
       prime = {
         sync.enable = true;
 
         nvidiaBusId = "PCI:1:0:0";
         intelBusId = "PCI:0:2:0";
       };
+      */
     };
   };
 
