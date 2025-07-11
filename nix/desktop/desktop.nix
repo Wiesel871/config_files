@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  user,
   ...
 }: {
   networking = {
@@ -46,7 +47,7 @@
 
   security.rtkit.enable = true;
 
-  users.users.wiesel = {
+  users.users.${user} = {
     isNormalUser = true;
     description = "Filip Pavlovic";
     extraGroups = ["networkmanager" "wheel"];
