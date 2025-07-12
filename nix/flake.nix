@@ -28,9 +28,9 @@
       }).neovim;
 
     nixosConfigurations = {
-      laptop-gnome = mkDesktop {configModule = ./desktop/laptop/gnome.nix;};
-      laptop-i3 = mkDesktop {configModule = ./desktop/laptop/i3.nix;};
-      laptop-xmonad = mkDesktop {configModule = ./desktop/laptop/xmonad.nix;};
+      laptop-gnome = mkDesktop {configModule = ./desktop/laptop/gnome;};
+      laptop-i3 = mkDesktop {configModule = ./desktop/laptop/i3;};
+      laptop-xmonad = mkDesktop {configModule = ./desktop/laptop/xmonad;};
 
       vm-kde = mkDesktop {configModule = ./desktop/vm/kde.nix;};
 

@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./.
+    ./..
   ];
   services = {
     xserver = {

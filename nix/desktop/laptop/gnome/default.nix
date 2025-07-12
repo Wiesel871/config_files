@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./.
+    ./..
   ];
   services = {
     displayManager.gdm.enable = true;

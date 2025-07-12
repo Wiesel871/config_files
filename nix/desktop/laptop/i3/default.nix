@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./shared.nix
+    ./..
   ];
   services = {
     desktopManager.xterm.enable = false;
