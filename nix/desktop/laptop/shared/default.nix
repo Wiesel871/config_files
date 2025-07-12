@@ -1,9 +1,9 @@
 {...}: {
   imports = [
     ./hardware
-    ./networking
-    ./services
-    ./environment
-    ./programs
+    ./networking.nix
+    ./services.nix
+    ./environment.nix
+    ./programs.nix
   ];
 }

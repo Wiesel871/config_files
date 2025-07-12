@@ -1,6 +1,6 @@
-{...}: {
+{lib, ...}: {
   networking = {
-    useDHCP = true;
+    useDHCP = lib.mkDefault true;
     firewall = {
       allowPing = true;
       allowedTCPPortRanges = [
