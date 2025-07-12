@@ -1,3 +1,3 @@
-{...} @ inputs: {
+{pkgs, ...} @ inputs: {
   vim = import ./vim inputs;
 }
