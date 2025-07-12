@@ -16,15 +16,10 @@
     nvf,
     ...
   } @ inputs: let
-    pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    mkSystem = import ./module-template.nix {inherit inputs;};
-    mkSystemUser = user: configModule:
-      mkSystem {
-        user = user;
-        configModule = configModule;
-      };
-    mkLaptop = mkSystemUser "wiesel";
-    mkWsl = mkSystemUser "nixos";
+    mkSystem = args: import ./module-template.nix ({inherit inputs;} // args);
+
+    mkDesktop = args: mkSystem ({user = "wiesel";} // args);
+    mkWsl = args: mkSystem ({user = "nixos";} // args);
   in {
     packages."x86_64-linux".default =
       (nvf.lib.neovimConfiguration {
@@ -33,12 +28,13 @@
       }).neovim;
 
     nixosConfigurations = {
-      laptop-gnome = mkLaptop ./desktop/laptop/gnome.nix;
-      laptop-i3 = mkLaptop ./desktop/laptop/i3.nix;
-      laptop-xmonad = mkLaptop ./desktop/laptop/xmonad.nix;
-      vm-kde = mkLaptop ./desktop/vm/kde.nix;
+      laptop-gnome = mkDesktop {configModule = ./desktop/laptop/gnome.nix;};
+      laptop-i3 = mkDesktop {configModule = ./desktop/laptop/i3.nix;};
+      laptop-xmonad = mkDesktop {configModule = ./desktop/laptop/xmonad.nix;};
 
-      wsl = mkWsl ./wsl.nix;
+      vm-kde = mkDesktop {configModule = ./desktop/vm/kde.nix;};
+
+      wsl = mkWsl {configModule = ./wsl;};
     };
   };
 }

@@ -6,7 +6,7 @@
 }: {
   imports = [
     ./hardware.nix
-    ../desktop.nix
+    ./..
   ];
   boot = {
     loader = {

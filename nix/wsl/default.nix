@@ -1,12 +1,8 @@
 {
-  config,
-  lib,
   pkgs,
-  inputs,
   ...
 }: {
   imports = [
-    # include NixOS-WSL modules
     <nixos-wsl/modules>
   ];
 

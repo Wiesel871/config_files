@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ./shared.nix
+    ./.
   ];
   services = {
     displayManager.sddm.enable = true;

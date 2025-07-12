@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./shared.nix
+    ./.
   ];
   services = {
     xserver = {
