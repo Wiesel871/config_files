@@ -17,24 +17,25 @@
     home-manager,
     ...
   } @ inputs: let
-    pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    mkSystem = import ./module-template.nix {inherit inputs; };
+    mkSystem = args: import ./module-template.nix ({inherit inputs;} // args);
+
+    mkDesktop = args: mkSystem ({user = "wiesel";} // args);
+    mkWsl = args: mkSystem ({user = "nixos";} // args);
   in {
     packages."x86_64-linux".default =
       (nvf.lib.neovimConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        modules = [./nvf-configuration.nix];
+        modules = [./nvf/default.nix];
       }).neovim;
 
     nixosConfigurations = {
-      desktop = mkSystem {
-        configModule = ./configuration.desktop.nix;
-        user = "wiesel";
-      };
-      wsl = mkSystem {
-        configModule = ./configuration.wsl.nix;
-        user = "nixos";
-      };
+      laptop-gnome = mkDesktop {configModule = ./desktop/laptop/gnome;};
+      laptop-i3 = mkDesktop {configModule = ./desktop/laptop/i3;};
+      laptop-xmonad = mkDesktop {configModule = ./desktop/laptop/xmonad;};
+
+      vm-kde = mkDesktop {configModule = ./desktop/vm/kde.nix;};
+
+      wsl = mkWsl {configModule = ./wsl;};
     };
   };
 }
