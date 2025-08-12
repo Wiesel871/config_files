@@ -14,6 +14,7 @@
     self,
     nixpkgs,
     nvf,
+    home-manager,
     ...
   } @ inputs: let
     mkSystem = args: import ./module-template.nix ({inherit inputs;} // args);
