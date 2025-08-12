@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   programs = {
     #pay-respects.enable = true;
     #ccache.enable = true;
@@ -27,6 +27,9 @@
       enable = true;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
     };
   };
 }

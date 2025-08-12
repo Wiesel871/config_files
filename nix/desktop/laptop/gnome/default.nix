@@ -9,6 +9,7 @@
   ];
   services = {
     displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = false;
     desktopManager.gnome.enable = true;
   };
   environment = {

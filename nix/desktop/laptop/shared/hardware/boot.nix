@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   modulesPath,
   ...
 }: {
@@ -8,16 +9,35 @@
       availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod"];
       kernelModules = [];
     };
-    kernelModules = ["kvm-intel"];
-    kernelPackages = pkgs.linuxPackages;
-    extraModulePackages = [];
+    kernelModules = [
+      "kvm-intel"
+      "thunderbolt"
+      "usbhid"
+      "joydev"
+      "xpad"
+      "nvidia"
+      "nvidia_modeset"
+      "nvidia_uvm"
+      "nvidia_drm"
+      "pci_hotplug"
+    ];
+
+    kernelPackages = pkgs.linuxPackages_zen;
+    kernelParams = ["pci=realloc"];
+    extraModulePackages = [
+
+    ];
+
     supportedFilesystems = ["ntfs"];
 
     loader = {
       systemd-boot.enable = false;
+
       efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
+
+        configurationLimit = 5;
         efiSupport = true;
         useOSProber = true;
         device = "nodev";

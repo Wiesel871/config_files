@@ -14,6 +14,20 @@
         enableContribAndExtras = true;
         #config = ./xmonad.hs;
       };
+
+        config = "
+Section \"Module\"
+    Load \"modesetting\"
+EndSection
+
+Section \"Device\"
+    Identifier \"Device0\"
+    Driver     \"nvidia\"
+    BusID      \"PCI:06:0:0\"
+    Option     \"AllowEmptyInitialConfiguration\"
+    Option     \"AllowExternalGpus\" \"True\"
+EndSection
+";
     };
 
     dbus.enable = true;

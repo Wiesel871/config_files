@@ -1,6 +1,4 @@
 {...}: {
-  system.stateVersion = "25.11";
-
   programs = {
     vim.enable = true;
     git = {

@@ -4,11 +4,12 @@ in {
   home = {
     #username = "nixos";
     #homeDirectory = "/home/nixos";
-    stateVersion = "24.05";
+    stateVersion = "25.11";
     packages = [
     ];
   };
 
+    /*
   dconf.settings = {
     "org/gnome/shell" = {
       enabled-extensions = [
@@ -21,13 +22,12 @@ in {
       show-extension-description = true;
     };
 
-    /*
     "org/gnome/desktop/interface" = {
       gtk-theme = lib.mkForce theme;
       color-scheme = "prefer-dark";
     };
-    */
   };
+    */
 
   /*
   gtk = {

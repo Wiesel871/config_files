@@ -4,6 +4,7 @@
     systemPackages = with pkgs; [
       alacritty
       arandr
+      brave
       cmake
       deja-dup
       discord
@@ -16,6 +17,7 @@
       lshw
       parsec-bin
       spotify
+      teamspeak3
       unzip
       wget
       xclip
@@ -23,5 +25,8 @@
     ];
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    nvidia.acceptLicense = true;
+  };
 }
