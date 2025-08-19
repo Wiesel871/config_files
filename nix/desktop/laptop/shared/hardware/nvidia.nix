@@ -1,3 +1,4 @@
+{}:
 {
       open = false;
 
@@ -29,4 +30,4 @@
         nvidiaBusId = "PCI:6:0:0";
         intelBusId = "PCI:0:2:0";
       };
-};
+}

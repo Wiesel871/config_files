@@ -32,6 +32,7 @@
       laptop-gnome = mkDesktop {configModule = ./desktop/laptop/gnome;};
       laptop-i3 = mkDesktop {configModule = ./desktop/laptop/i3;};
       laptop-xmonad = mkDesktop {configModule = ./desktop/laptop/xmonad;};
+      laptop-xfce = mkDesktop {configModule = ./desktop/laptop/xfce;};
 
       vm-kde = mkDesktop {configModule = ./desktop/vm/kde.nix;};
 
