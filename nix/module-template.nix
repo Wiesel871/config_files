@@ -1,13 +1,27 @@
-{ inputs, system ? "x86_64-linux", extraModules ? [] }:
-
-{ configModule }:
-
+{
+  inputs,
+  extraModules ? [ ],
+  configModule,
+  user,
+  nixpkgs,
+  ...
+}: let pkgs = nixpkgs; in
 inputs.nixpkgs.lib.nixosSystem {
-  inherit system;
-  specialArgs = { inherit inputs; };
+  system = "x86_64-linux";
+  specialArgs = { inherit inputs user; };
   modules = [
+    ./shared
     configModule
-    ./configuration.shared.nix
     inputs.nvf.nixosModules.default
-  ] ++ extraModules;
+
+    inputs.home-manager.nixosModules.home-manager
+    {
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        users.${user} = ./home.nix;
+      };
+    }
+  ]
+  ++ extraModules;
 }
