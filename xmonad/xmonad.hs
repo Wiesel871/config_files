@@ -14,6 +14,7 @@ import XMonad
 import Data.Map qualified as M
 import XMonad.Hooks.EwmhDesktops
 import XMonad.StackSet qualified as W
+import XMonad.Util.EZConfig (additionalKeys, additionalKeysP)
 import XMonad.Util.SpawnOnce
 
 myTerminal = "alacritty"
@@ -66,15 +67,22 @@ doomCmd = "dsda-doom " ++ doomIWAD ++ doomSkill ++ doomLvl
 
 spawnLog cmd = spawn ("echo \"" ++ cmd ++ "\" > ~/xmonad.log;" ++ cmd)
 
+myKeyBindings =
+    [ ("<XF86AudioRaiseVolume>", spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1.5%+")
+    , ("<XF86AudioLowerVolume>", spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1.5%-")
+    , ("<XF86AudioMute>", spawn "wpctl set-mute @DEFAULT_SINK@ toggle")
+    ]
+
 myKeys conf@(XConfig{XMonad.modMask = modm}) =
     M.fromList $
         -- launch a terminal
         [ ((modm, xK_Return), spawn $ XMonad.terminal conf)
         , -- launch dmenu
-          ((modm, xK_d), spawnLog "dmenu_run")
+            ((modm, xK_d), spawnLog "dmenu_run")
         , ((modm, xK_p), spawnLog doomCmd)
         , -- launch gmrun
           ((modm .|. shiftMask, xK_d), spawn "gmrun")
+        --, ((modm, xK_d), spawn "gmrun")
         , -- close focused window
           ((modm .|. shiftMask, xK_c), kill)
         , -- Rotate through the available layout algorithms
@@ -141,7 +149,7 @@ myKeys conf@(XConfig{XMonad.modMask = modm}) =
             ++
             -- custom
             [ ((0, xK_Print), spawnLog "flameshot gui --clipboard -p ~/KINGSTON/Pictures/Screenshots")
-            , ((shiftMask, xK_Print), spawnLog "flameshot screen --clipboard")
+            , ((shiftMask, xK_Print), spawnLog "flameshot screen --clipboard -p ~/KINGSTON/Pictures/Screenshots")
             ]
 
 ------------------------------------------------------------------------
@@ -291,6 +299,7 @@ defaults =
         , logHook = myLogHook
         , startupHook = myStartupHook
         }
+        `additionalKeysP` myKeyBindings
 
 -- | Finally, a copy of the default bindings in simple textual tabular format.
 help :: String

@@ -4,7 +4,8 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ./boot.nix
@@ -18,7 +19,6 @@
 
     graphics.enable = true;
 
-    #nvidia = import ./nvidia.nix;
     nvidia = {
       open = false;
 
@@ -33,7 +33,7 @@
 
       nvidiaSettings = true;
 
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.production;
 
       prime = {
         offload = {
@@ -51,4 +51,35 @@
       };
     };
   };
+    /*
+  specialisation = {
+    external-display.configuration = {
+      system.nixos.tags = [ "external-display" ];
+
+      hardware.nvidia = {
+        modesetting.enable = pkgs.lib.mkForce false;
+        powerManagement.enable = pkgs.lib.mkForce false;
+
+        prime = {
+          nvidiaBusId = pkgs.lib.mkForce "PCI:9:0:0";
+          offload.enable = pkgs.lib.mkForce false;
+        };
+      };
+
+      services.xserver.config = pkgs.lib.mkOverride 0 ''
+        Section "Module"
+            Load           "modesetting"
+        EndSection
+
+        Section "Device"
+            Identifier     "Device0"
+            Driver         "nvidia"
+            BusID          "9:0:0"
+            Option         "AllowEmptyInitialConfiguration"
+            Option         "AllowExternalGpus" "True"
+        EndSection
+      '';
+    };
+  };
+    */
 }

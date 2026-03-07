@@ -8,6 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvf.url = "github:notashelf/nvf";
+        #nvf.url = "github:wiesel871/nvf_glsl";
   };
 
   outputs = {
@@ -17,7 +18,7 @@
     home-manager,
     ...
   } @ inputs: let
-    mkSystem = args: import ./module-template.nix ({inherit inputs;} // args);
+    mkSystem = args: import ./module-template.nix ({inherit inputs; inherit nixpkgs;} // args);
 
     mkDesktop = args: mkSystem ({user = "wiesel";} // args);
     mkWsl = args: mkSystem ({user = "nixos";} // args);
@@ -35,6 +36,11 @@
       laptop-xfce = mkDesktop {configModule = ./desktop/laptop/xfce;};
 
       vm-kde = mkDesktop {configModule = ./desktop/vm/kde.nix;};
+
+                                default = nixpkgs.lib.nixosSystem {
+                                        system = "x86_64-linux";
+                                        modules = [./default/configuration.nix ];
+                                };
 
       wsl = mkWsl {configModule = ./wsl;};
     };

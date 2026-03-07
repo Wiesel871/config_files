@@ -19,8 +19,9 @@
       "nvidia_modeset"
       "nvidia_uvm"
       "nvidia_drm"
-      "pci_hotplug"
+            #"pci_hotplug"
     ];
+    blacklistedKernelModules = ["nova_core" "nouveau"];
 
     kernelPackages = pkgs.linuxPackages_zen;
     kernelParams = ["pci=realloc"];
@@ -31,9 +32,10 @@
     supportedFilesystems = ["ntfs"];
 
     loader = {
-      systemd-boot.enable = false;
+      systemd-boot.enable = true;
 
       efi.canTouchEfiVariables = true;
+                        /*
       grub = {
         enable = true;
 
@@ -57,6 +59,7 @@
           }
         '';
       };
+                        */
       timeout = 15;
     };
   };

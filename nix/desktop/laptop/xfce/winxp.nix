@@ -1,18 +1,19 @@
 {
   pkgs,
-  stdenv,
   lib,
+  stdenv,
+  fetchFromGitHub,
   ...
 }:
 stdenv.mkDerivation rec {
   pname = "xptc-project";
   version = "unstable-2023-12-19"; # Update with actual version/date
 
-  src = lib.fetchFromGitHub {
+  src = fetchFromGitHub {
     owner = "rozniak";
     repo = "xfce-winxp-tc";
     rev = "c9e301b7981c720e39307dd90e727f081492f22f";
-    sha256 = lib.fakeSha256;
+    sha256 = "sha256-2c/Oo9R3ouMb2hqsEyWUXtzdzgE/uMGLCbrMN8cvhKI=";
   };
 
   nativeBuildInputs = with pkgs;
@@ -23,7 +24,7 @@ stdenv.mkDerivation rec {
       python3
       coreutils
       gcc
-      make
+      gnumake
       bash
       autoPatchelfHook
     ]
@@ -45,6 +46,7 @@ stdenv.mkDerivation rec {
   # The actual build process
   buildPhase = ''
     runHook preBuild
+    echo "Current directory: $(pwd)"
 
     # Move to packaging directory
     cd packaging

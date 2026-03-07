@@ -1,4 +1,5 @@
-{user, ...}: {
+{ user, pkgs, ... }:
+{
   imports = [
     ./shared
   ];
@@ -25,6 +26,15 @@
   users.users.${user} = {
     isNormalUser = true;
     description = "Filip Pavlovic";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = [
+      "docker"
+      "networkmanager"
+      "wheel"
+      "input"
+    ];
+    packages = with pkgs; [
+      flatpak
+      #gnome-software
+    ];
   };
 }

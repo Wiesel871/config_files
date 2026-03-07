@@ -1,6 +1,7 @@
 {pkgs, ...} @ inputs: {
   statusline.lualine.enable = true;
   telescope.enable = true;
+  comments.comment-nvim.enable = true;
 
   languages = import ./languages.nix inputs;
   diagnostics = import ./diagnostics.nix inputs;
@@ -15,9 +16,12 @@
     style = "main";
   };
 
-  startPlugins = with pkgs; [
-    vimPlugins.harpoon
-    vimPlugins.undotree
+  startPlugins = with pkgs.vimPlugins; [
+    harpoon
+    undotree
+    vim-glsl
+    nvim-treesitter-parsers.glsl
+    nvim-lspconfig
   ];
 
   additionalRuntimePaths = ["$HOME/config_files/nvim"];
@@ -29,6 +33,7 @@
       ''
         require("wiesel")
         require("plugin")
+        vim.lsp.enable('glsl_analyzer')
       '';
   };
 }

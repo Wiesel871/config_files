@@ -17,7 +17,7 @@
       lshw
       parsec-bin
       spotify
-      teamspeak3
+            #teamspeak3
       unzip
       wget
       xclip

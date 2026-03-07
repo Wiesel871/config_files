@@ -3,14 +3,13 @@
   pkgs,
   inputs,
   lib,
-  stdenv,
   ...
 } @args : {
   imports = [
     ./..
   ];
   services = {
-    services.xserver = {
+    xserver = {
       enable = true;
       desktopManager = {
         xterm.enable = false;
@@ -19,10 +18,10 @@
         };
       };
     };
-    services.displayManager.defaultSession = "xfce";
+    displayManager.defaultSession = "xfce";
   };
   environment.systemPackages = [
-    (pkgs.callPackage /winxp.nix args)
+    (pkgs.callPackage ./winxp.nix {})
   ];
   programs = {
     xfconf.enable = true;
