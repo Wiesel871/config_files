@@ -9,6 +9,9 @@
     hardware.bolt.enable = true;
 
     flatpak.enable = true;
+    pcscd.enable = true;
+
+    dbus.packages = [ pkgs.gcr ];
 
     xserver = {
       enable = true;

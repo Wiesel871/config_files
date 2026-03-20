@@ -11,6 +11,9 @@
       haskellPackages.haskell-language-server
       haskellPackages.hoogle
       haskellPackages.ghcide
+
+      gnupg
+      pinentry-curses
     ];
   };
 }
