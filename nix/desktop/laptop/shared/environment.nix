@@ -14,6 +14,8 @@
 
       gnupg
       pinentry-curses
+
+      cacert
     ];
   };
 }
