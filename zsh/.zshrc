@@ -8,7 +8,6 @@ export PATH=$PATH:$HOME/go/bin
 
 export XDG_CONFIG_HOME=$HOME/.config
 export TERMINAL=gnome-terminal
-EDITOR=nvim
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -106,82 +105,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [ -f "/home/wiesel/.ghcup/env" ] && source "/home/wiesel/.ghcup/env" # ghcup-env
-
-alias git_rp="git reset --hard && git pull"
-
-git_ucp () {
-    git add -u &&
-    git commit -m "$1" &&
-    git push && return 0
-    return 1
-}
-
-git_acp () {
-    git add . &&
-    git commit -m "$1" &&
-    git push && return 0
-    return 1
-}
-
-export NIX_CONF_PATH_S="/etc/nixos/configuration.nix"
-export MY_CONFIG_FILES="/home/wiesel/config_files/"
-
-alias nix_update="sudo cp "$NIX_CONF_PATH_S" "$CONFIG_FILES""
-
-
-nix_add() {
-    for package in "$@"; do
-        sudo sed -i "/environment.systemPackages = with pkgs; \[/s/\$/ \n\t$package/" "$NIX_CONF_PATH_S"
-        echo "Added '$package' to systemPackages."
-    done
-}
-
-nix_add_build() {
-    if [ -z "$1" ]; then
-        echo "Usage: nix_add <package1> [<package2> ...]"
-        return 1
-    fi
-    
-    for package in "$@"; do
-        sudo sed -i "/environment.systemPackages = with pkgs; \[/s/\$/ \n\t$package/" "$NIX_CONF_PATH_S" &&
-        echo "Added '$package' to systemPackages."
-    done
-    sudo nixos-rebuild switch && 
-    sudo rm -rf "$CONFIG_FILES/configuration.nix" &&
-    sudo cp "$NIX_CONF_PATH_S" "$CONFIG_FILES" &&
-    git add "$CONFIG_FILES/configuration.nix" &&
-    git commit -m "succesfully added packages: $@ to nix config file" &&
-    return 1
-
-    return 0
-}
-
-nix_rm() {
-    for package in "$@"; do
-        sudo sed -i "/\t$package/d" "$NIX_CONF_PATH_S" &&
-        echo "Removed '$package' from systemPackages."
-    done
-}
-
-nix_rm_build() {
-    if [ -z "$1" ]; then
-        echo "Usage: nix_rm <package1> [<package2> ...]"
-        return 1
-    fi
-    
-    for package in "$@"; do
-        sudo sed -i "/\t$package/d" "$NIX_CONF_PATH_S"
-        echo "Removed '$package' from systemPackages."
-    done
-    sudo nixos-rebuild switch && 
-    sudo rm -rf "$CONFIG_FILES/configuration.nix" &&
-    sudo cp "$NIX_CONF_PATH_S" "$CONFIG_FILES" &&
-    git add "$CONFIG_FILES/configuration.nix" &&
-    git commit -m "succesfully removed packages: $@ from nix config file" &&
-    return 1
-
-    return 0
-}
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
