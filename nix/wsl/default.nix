@@ -1,23 +1,25 @@
 {
   pkgs,
+  user,
+  nixos-wsl,
   ...
-}: {
-  imports = [
-    <nixos-wsl/modules>
-  ];
+}:
+{
 
   wsl = {
     enable = true;
-    defaultUser = "nixos";
+    defaultUser = user;
     useWindowsDriver = true;
   };
 
   environment.systemPackages = with pkgs; [
-    cargo
-    rustc
-    rustfmt
   ];
 
   programs = {
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      #homedir = "${config.home.homeDirectory}/.gnupg";
+    };
   };
 }
