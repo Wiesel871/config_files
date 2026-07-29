@@ -1,5 +1,3 @@
-LAST_EPOCH=20516
+LAST_EPOCH=20663
 EXIT_STATUS=1
-ERROR='error: you need to resolve your current index first
-.gitpod.Dockerfile: needs merge
-.gitpod.yml: needs merge'
+ERROR='fatal: invalid reference: master'
