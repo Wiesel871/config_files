@@ -4,8 +4,6 @@ let
 in
 {
   home = {
-    #username = "nixos";
-    #homeDirectory = "/home/nixos";
     stateVersion = "25.11";
     packages = with pkgs; [
       pinentry-tty
